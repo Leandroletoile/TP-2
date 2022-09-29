@@ -1,6 +1,7 @@
 import { Router } from "express"
-import { getAllUsers, createUser, getOneUser, updateUser, deleteUser }  from "../controllers/users.js"
-import { checkLoggedIn , checkAdmin , checkLoggedUser } from '../middlewares/jwt.js'
+import { getAllUsers, createUser, getOneUser, updateUser, deleteUser } from "../controllers/users.js"
+import { checkAdmin } from '../middlewares/jwt.js'
+
 
 
 const router = Router()
@@ -10,6 +11,6 @@ router
     .post("/", createUser)
     .get("/:id", getOneUser)
     .put("/:id", updateUser)
-    .delete("/:id", deleteUser)
+    .delete("/:id", [checkAdmin], deleteUser)
 
 export default router

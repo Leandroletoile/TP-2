@@ -7,7 +7,7 @@ const User = {
         const users = await prisma.user.findMany()
         return users
     },
-    getUser: async (id) => {
+    getOneUser: async (id) => {
         const user = await prisma.user.findUnique({
             where: {
                 id: id

@@ -2,7 +2,9 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from 'passport-local'
 import User from "../models/User.js"
 import { generateHash } from '../utils/hash.js'
-import bcrypt from "bcrypt"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
 
 
 
@@ -21,18 +23,18 @@ passport.use('local-register', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 
-}, async (req, email, password, done) => {
+}, async (_, email, password, done) => {
 
-    const thereIsUser = await User.getUserByEmail(email)
+    const thereIsUser = await prisma.user.findUnique({ where: { email: email } })
     const newUser = {
-        ...req.body,
+        email,
         password: generateHash(password)
     }
     if (thereIsUser) {
         return done(null, false)
     } else {
-        await User.createUser(newUser)
-        done(newUser)
+        await User.createUser({ ...newUser })
+        done({ ...newUser })
     }
 }
 ))

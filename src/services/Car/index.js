@@ -3,24 +3,24 @@ import Car from "../../models/Car.js";
 
 const CarService = {
 
-    getAllCars:  () => {
-        const cars =  Car.getAllCars();
+    getAllCars: () => {
+        const cars = Car.getAllCars();
         return cars;
     },
-    getOneCar:  (id) => {
-        const car =  Car.getOneCar(id);
+    getOneCar: (id) => {
+        const car = Car.getOneCar(id);
         return car;
     },
-    createCar:  (car) => {
-        const newCar =  Car.createCar(car);
+    createCar: (car) => {
+        const newCar = Car.createCar(car);
         return newCar;
     },
-    updateCar:  (id, car) => {
-        const updatedCar =  Car.updateCar(id, car);
+    updateCar: (id, car) => {
+        const updatedCar = Car.updateCar(id, car);
         return updatedCar;
     },
-    deleteCar:  (id) => {
-        const deletedCar =  Car.deleteCar(id);
+    deleteCar: (id) => {
+        const deletedCar = Car.deleteCar(id);
         return deletedCar;
     }
 
